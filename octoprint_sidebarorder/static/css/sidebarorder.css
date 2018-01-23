@@ -1,4 +1,4 @@
-.ui-pnotify.taborder-reloadneeded .ui-pnotify-container {
+.ui-pnotify.sidebarorder-reloadneeded .ui-pnotify-container {
 	background-color: #404040 !important;
 	background-image: none !important;
 	border: none !important;
@@ -6,21 +6,21 @@
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 }
-.ui-pnotify.taborder-reloadneeded .ui-pnotify-title, .ui-pnotify.taborder-reloadneeded .ui-pnotify-text {
+.ui-pnotify.sidebarorder-reloadneeded .ui-pnotify-title, .ui-pnotify.sidebarorder-reloadneeded .ui-pnotify-text {
 	color: #FFF !important;
 }
-.ui-pnotify.taborder-reloadneeded .ui-pnotify-title {
+.ui-pnotify.sidebarorder-reloadneeded .ui-pnotify-title {
 	font-weight: bold;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #FFF;
 	text-indent: -60px;
 }
-.ui-pnotify.taborder-reloadneeded .ui-pnotify-icon {
+.ui-pnotify.sidebarorder-reloadneeded .ui-pnotify-icon {
 	margin-top: 40px;
 	float: left;
 }
-.ui-pnotify.taborder-reloadneeded .icon {
+.ui-pnotify.sidebarorder-reloadneeded .icon {
 	margin: 10px;
 	width: 40px;
 	height: 40px;

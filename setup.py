@@ -4,30 +4,30 @@
 ### Do not forget to adjust the following variables to your own plugin.
 
 # The plugin's identifier, has to be unique
-plugin_identifier = "taborder"
+plugin_identifier = "sidebarorder"
 
 # The plugin's python package, should be "octoprint_<plugin identifier>", has to be unique
 plugin_package = "octoprint_%s" % plugin_identifier
 
 # The plugin's human readable name. Can be overwritten within OctoPrint's internal data via __plugin_name__ in the
 # plugin module
-plugin_name = "OctoPrint-TabOrder"
+plugin_name = "OctoPrint-SidebarOrder"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
 plugin_version = "0.1.0"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = "Simple plugin that replaces the temperature graph's background image."
+plugin_description = "Simple plugin that adds a gui to reorder sidebar items"
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
-plugin_author = "jneilliii"
+plugin_author = "zoombahh"
 
 # The plugin's author's mail address.
-plugin_author_email = "jneilliii+octoprint@gmail.com"
+plugin_author_email = ""
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/jneilliii/OctoPrint-TabOrder"
+plugin_url = "https://github.com/zoombahh/OctoPrint-SidebarOrder"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"
