@@ -14,11 +14,11 @@ plugin_package = "octoprint_%s" % plugin_identifier
 plugin_name = "OctoPrint-SidebarOrder"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "0.1.0"
+plugin_version = "0.3.0"
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
 # module
-plugin_description = "Simple plugin that adds a gui to reorder sidebar items"
+plugin_description = "Simple plugin to allow reordering of sidebars within OctoPrint."
 
 # The plugin's author. Can be overwritten within OctoPrint's internal data via __plugin_author__ in the plugin module
 plugin_author = "zoombahh"

@@ -32,7 +32,7 @@ $(function() {
 			if (data.reload) {				
 				new PNotify({
 					title: 'Reload Required',
-					text: 'Sidebar order has changed and a reload of the web interface is required.\n\n<span class="label label-important">After the save operation is complete<\/span> hold down the <span class="label">ctrl<\/span> key on your keyboard and press the Refresh button in your browser.\n\n',
+					text: 'Sidebar order has changed and a reload of the web interface is required.\n\n<span class="label label-important">After the save operation is complete<\/span> hold down the <span class="label">CTRL<\/span> key on your keyboard and press the <span class="label">F5<\/span> key.\n\n',
 					hide: false,
 					icon: 'icon icon-refresh',
 					addclass: 'sidebarorder-reloadneeded',
