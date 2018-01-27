@@ -14,7 +14,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
+		return dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}],global_tabs=self._settings.global_get(["appearance","components","order","tab"]))
 		
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"])

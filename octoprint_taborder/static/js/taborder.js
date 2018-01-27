@@ -15,6 +15,7 @@ $(function() {
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
+			console.log(self.settings.settings.plugins.taborder.global_tabs());
         }
 		
 		self.onEventSettingsUpdated = function (payload) {
