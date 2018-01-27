@@ -6,7 +6,6 @@ $(function() {
 		self.tabs = ko.observableArray();
 		self.selectedTab = ko.observable();
 		self.reloadOverlay = undefined;
-		self.global_tabs = ko.observableArray();
 		self.globaltabs = ko.computed(function() {
 								var arrOutput = ko.utils.arrayMap(self.tabs(), function(tab) {
 									return tab.name();
@@ -16,7 +15,6 @@ $(function() {
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
-			self.global_tabs(self.settings.settings.plugins.taborder.global_tabs());
         }
 		
 		self.onEventSettingsUpdated = function (payload) {
@@ -68,6 +66,9 @@ $(function() {
 					}
 				});
 			};
+			if (data.global_tabs) {
+				console.log(data.global_tabs);
+			}
         };
 
 		self.addTab = function(data) {
