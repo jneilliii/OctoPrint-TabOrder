@@ -20,7 +20,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 		old_tabs = self._settings.get(["tabs"])
 
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-		self._plugin_manager.send_plugin_message(self._identifier, dict(global_tabs=self._settings.global_get(["appearance","components","order","tab"]))
+		self._plugin_manager.send_plugin_message(self._identifier, dict(global_tabs=self._settings.global_get(["appearance","components","order","tab"])))
 		new_tabs = self._settings.get(["tabs"])
 		if old_tabs != new_tabs:
 			self._logger.info("tabs changed from {old_tabs} to {new_tabs} reordering tabs.".format(**locals()))
