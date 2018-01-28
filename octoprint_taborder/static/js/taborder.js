@@ -12,6 +12,7 @@ $(function() {
 								});
 								return arrOutput;
 							});
+		self.global_tabs = ko.observableArray();
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
@@ -19,6 +20,7 @@ $(function() {
 		
 		self.onEventSettingsUpdated = function (payload) {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
+			console.log(templates.tab.order);
         }
 		
 		self.onStartup = function(){
