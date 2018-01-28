@@ -5,8 +5,7 @@ import os
 
 class taborder(octoprint.plugin.AssetPlugin,
 				octoprint.plugin.TemplatePlugin,
-                octoprint.plugin.SettingsPlugin,
-				octoprint.plugin.StartupPlugin):
+                octoprint.plugin.SettingsPlugin):
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
@@ -15,15 +14,18 @@ class taborder(octoprint.plugin.AssetPlugin,
 	
 	##~~ Startup mixin
 	def on_after_startup(self):
+		
+	##-- Settings mixin
+	def get_settings_defaults(self):
+		default_tabs = dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
 		plugins = self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin)
 		for plugin in plugins:
 			for template in plugin.get_template_configs():
 				if template["type"] == "tab":
 					self._logger.info("plugin_" + plugin._identifier)
-		
-	##-- Settings mixin
-	def get_settings_defaults(self):
-		return dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
+					default_tabs["tabs"].append({'name':'plugin_' + plugin._identifier})
+					
+		return default_tabs
 		
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"])
