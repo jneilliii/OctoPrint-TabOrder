@@ -17,8 +17,9 @@ class taborder(octoprint.plugin.AssetPlugin,
 	def on_after_startup(self):
 		plugins = self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin)
 		for plugin in plugins:
-			if plugin.get_template_configs().type == "tab":
-				self._logger("plugin_" + plugin._identifier)
+			for template in plugin.get_template_configs():
+				if template.type == "tab":
+					self._logger("plugin_" + plugin._identifier)
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
