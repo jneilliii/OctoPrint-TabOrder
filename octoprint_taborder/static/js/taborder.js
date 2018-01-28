@@ -18,9 +18,7 @@ $(function() {
         }
 		
 		self.onEventSettingsUpdated = function (payload) {
-            self.tabs(self.settings.settings.plugins.taborder.tabs());			
-			console.log(self.settings.settings.plugins.taborder.global_tabs());
-			console.log(self.global_tabs());
+            self.tabs(self.settings.settings.plugins.taborder.tabs());
         }
 		
 		self.onStartup = function(){
