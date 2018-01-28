@@ -5,12 +5,19 @@ import os
 
 class taborder(octoprint.plugin.AssetPlugin,
 				octoprint.plugin.TemplatePlugin,
-                octoprint.plugin.SettingsPlugin):
+                octoprint.plugin.SettingsPlugin,
+				octoprint.plugin.StartupPlugin):
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
 		return dict(js=["js/taborder.js"],
 					css=["css/taborder.css"])
+	
+	##~~ Startup mixin
+	def on_after_startup(self):
+		plugins = self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin)
+		for plugin in plugins:
+			self._logger.info(plugin._identifier)
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):

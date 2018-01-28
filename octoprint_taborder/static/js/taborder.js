@@ -20,7 +20,6 @@ $(function() {
 		
 		self.onEventSettingsUpdated = function (payload) {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
-			console.log(templates.tab.order);
         }
 		
 		self.onStartup = function(){
