@@ -12,9 +12,6 @@ class taborder(octoprint.plugin.AssetPlugin,
 		return dict(js=["js/taborder.js"],
 					css=["css/taborder.css"])
 	
-	##~~ Startup mixin
-	def on_after_startup(self):
-		
 	##-- Settings mixin
 	def get_settings_defaults(self):
 		default_tabs = dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
@@ -24,7 +21,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 				if template["type"] == "tab":
 					self._logger.info("plugin_" + plugin._identifier)
 					default_tabs["tabs"].append({'name':'plugin_' + plugin._identifier})
-					
+
 		return default_tabs
 		
 	def on_settings_save(self, data):
