@@ -19,7 +19,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 		for plugin in plugins:
 			for template in plugin.get_template_configs():
 				if template["type"] == "tab":
-					self._logger("plugin_" + plugin._identifier)
+					self._logger.info("plugin_" + plugin._identifier)
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
