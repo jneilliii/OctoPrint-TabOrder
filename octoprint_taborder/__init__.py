@@ -22,7 +22,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 		
 		plugins = []
-		for plugin in self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin)
+		for plugin in self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin):
 			plugins.append(plugin["name"])
 		
 		self._plugin_manager.send_plugin_message(self._identifier, dict(global_tabs=plugins))
