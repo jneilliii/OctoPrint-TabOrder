@@ -23,10 +23,10 @@
 	<div class="row-fluid">
 		<h4>Plugins</h4>
 	</div>
-	<div class="row-fluid" data-bind="foreach: settings.settings.plugins.taborder.global_tabs">
+	<div class="row-fluid" data-bind="foreach: global_tabs">
 		<div class="row-fluid" style="margin-bottom: 5px;">
 			<div class="span11" data-bind="text: name"></div>
-			<div class="span1 btn-group"><button class="btn btn-mini icon-plus" data-bind="click: $root.addTab"></button></div>
+			<div class="span1 btn-group"><button class="btn btn-mini icon-plus" data-bind="click: $root.addPluginTab"></button></div>
 		</div>
 	</div>
 </form>
