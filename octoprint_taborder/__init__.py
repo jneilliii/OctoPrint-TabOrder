@@ -15,12 +15,6 @@ class taborder(octoprint.plugin.AssetPlugin,
 	##-- Settings mixin
 	def get_settings_defaults(self):
 		default_tabs = dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
-		plugins = self._plugin_manager.get_implementations(octoprint.plugin.TemplatePlugin)
-		for plugin in plugins:
-			for template in plugin.get_template_configs():
-				if template["type"] == "tab":
-					self._logger.info("plugin_" + plugin._identifier)
-					default_tabs["tabs"].append({'name':'plugin_' + plugin._identifier})
 
 		return default_tabs
 		
