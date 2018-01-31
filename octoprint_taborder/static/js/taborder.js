@@ -12,7 +12,17 @@ $(function() {
 								});
 								return arrOutput;
 							});
-		self.global_tabs = ko.observableArray();
+		self.plugin_tabs = ko.observableArray();
+		self.missing_tabs = ko.dependentObservable(function() {
+														var differences = ko.utils.compareArrays(self.tabs, self.plugin_tabs());
+														var results = [];
+														ko.utils.arrayForEach(differences, function(difference) {
+															if (difference.status === "deleted") {
+																results.push(difference.value);
+															}
+														});
+														return results;
+													});
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
@@ -26,9 +36,7 @@ $(function() {
 			//self.reloadOverlay = $("#reloadui_overlay");
 			$('#tabs').find('a[data-toggle="tab"]').each(function(index,tab){
 																var tabname = tab.hash.replace('#','').replace('tab_','');
-																if(tabname.startsWith('plugin_')){
-																	self.global_tabs.push({'name':ko.observable(tabname)});
-																};
+																self.plugin_tabs.push({'name':ko.observable(tabname)});																	
 															});
 		}
 		
@@ -71,9 +79,6 @@ $(function() {
 					}
 				});
 			};
-			if (data.global_tabs) {
-				console.log(data.global_tabs);
-			}
         };
 
 		self.addTab = function(data) {
@@ -84,7 +89,7 @@ $(function() {
 		self.addPluginTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.push(data);
             self.tabs(self.settings.settings.plugins.taborder.tabs());
-			self.global_tabs.remove(data);
+			self.missing_tabs.remove(data);
 		}
 		
 		self.removeTab = function(data) {
