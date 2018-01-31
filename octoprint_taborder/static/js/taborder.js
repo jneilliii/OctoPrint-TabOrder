@@ -26,7 +26,7 @@ $(function() {
 			//self.reloadOverlay = $("#reloadui_overlay");
 			$('#tabs').find('a[data-toggle="tab"]').each(function(index,tab){
 																var tabname = tab.hash.replace('#','').replace('tab_','');
-																if(tabname startsWith('plugin_')){
+																if(tabname.startsWith('plugin_')){
 																	self.global_tabs.push({'name':tabname});
 																};
 															});
