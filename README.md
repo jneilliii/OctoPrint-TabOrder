@@ -14,7 +14,7 @@ Install via the Plugin Manager or manually using this URL:
 
 ## Adding plugin tabs
 
-The tab identifier for plugins can be obtained by clicking the tab in OctoPrint and emove the leading "tab_" from the hashtag found at the end of the url that loads. For example, the following url
+The tab identifier for plugins can be obtained by clicking the tab in OctoPrint and remove the leading "tab_" from the hashtag found at the end of the url that loads. For example, the following url
 
 ![screenshot](url.png)
 
