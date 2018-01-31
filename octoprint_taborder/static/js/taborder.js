@@ -12,7 +12,7 @@ $(function() {
 								});
 								return arrOutput;
 							});
-		self.global_tabs = ko.observableArray([{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}]);
+		self.global_tabs = ko.observableArray();
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
@@ -84,6 +84,7 @@ $(function() {
 		self.addPluginTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.push(data);
             self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.global_tabs.remove(data);
 		}
 		
 		self.removeTab = function(data) {
