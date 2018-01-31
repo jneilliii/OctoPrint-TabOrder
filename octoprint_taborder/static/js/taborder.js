@@ -12,7 +12,7 @@ $(function() {
 								});
 								return arrOutput;
 							});
-		self.global_tabs = ko.observableArray();
+		self.global_tabs = ko.observableArray([{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}]);
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
@@ -24,7 +24,12 @@ $(function() {
 		
 		self.onStartup = function(){
 			//self.reloadOverlay = $("#reloadui_overlay");
-			$('#tabs').find('a[data-toggle="tab"]').each(function(index,tab){console.log(tab.hash.replace('#','').replace('tab_',''));});
+			$('#tabs').find('a[data-toggle="tab"]').each(function(index,tab){
+																var tabname = tab.hash.replace('#','').replace('tab_','');
+																if(tabname starts with 'plugin_'){
+																	self.global_tabs.push({'name':tabname});
+																};
+															});
 		}
 		
 		self.onDataUpdaterPluginMessage = function(plugin, data) {
@@ -73,6 +78,11 @@ $(function() {
 
 		self.addTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable('')});
+            self.tabs(self.settings.settings.plugins.taborder.tabs());
+		}
+		
+		self.addPluginTab = function(data) {
+			self.settings.settings.plugins.taborder.tabs.push(data);
             self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
 		
