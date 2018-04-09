@@ -14,6 +14,18 @@ Install via the Plugin Manager or manually using this URL:
 
 ![screenshot](settings.png)
 
+## Adding plugin tabs
+
+The tab identifier for plugins can be obtained by clicking the tab in OctoPrint and remove the leading "tab_" from the hashtag found at the end of the url that loads. For example, the following url
+
+![screenshot](url.png)
+
+becomes
+
+![screenshot](plugin_identifier.png)
+
+in settings.
+
 ## Changelog
 
 ### [0.3.0] - 2018-01-24
