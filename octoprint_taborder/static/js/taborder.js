@@ -19,10 +19,29 @@ $(function() {
 		
 		self.onEventSettingsUpdated = function (payload) {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.renderTabs();
         }
 		
+		self.onAfterBinding = function(){
+			self.renderTabs();
+		}
+		
+		self.renderTabs = function(){
+			ko.utils.arrayForEach(self.tabs(), function(tab) {
+				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
+				if (!tab.showtext()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
+				}
+				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').addClass(tab.icon());
+				} else {
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').prepend('<i class="fa '+tab.icon()+'"></i> ');
+				}
+			});
+		}
+		
 		self.onStartup = function(){
-			self.reloadOverlay = $("#reloadui_overlay");
+			self.renderTabs();
 		}
 		
 		self.onDataUpdaterPluginMessage = function(plugin, data) {
@@ -67,7 +86,7 @@ $(function() {
         };
 
 		self.addTab = function(data) {
-			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable('')});
+			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable(''),'icon':ko.observable(''),'showtext':ko.observable(true)});
             self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
 		

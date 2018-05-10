@@ -9,12 +9,21 @@ class taborder(octoprint.plugin.AssetPlugin,
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
-		return dict(js=["js/taborder.js"],
+		return dict(js=["js/taborder.js","js/font-awesome.min.css"],
 					css=["css/taborder.css"])
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[{'name':'temperature'},{'name':'control'},{'name':'gcodeviewer'},{'name':'terminal'},{'name':'timelapse'}])
+		return dict(tabs=[{'name':'temperature','icon':'','showtext':True},{'name':'control','icon':'','showtext':True},{'name':'gcodeviewer','icon':'','showtext':True},{'name':'terminal','icon':'','showtext':True},{'name':'timelapse','icon':'','showtext':True}])
+		
+	def get_settings_version(self):
+		return 1
+		
+	def on_settings_migrate(self, target, current=None):
+		if current is None or current < self.get_settings_version():
+			# Reset plug settings to defaults.
+			self._logger.debug("Resetting TabOrder Tabs to default.")
+			self._settings.set(['tabs'], self.get_settings_defaults()["tabs"])
 		
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"])
