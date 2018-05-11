@@ -30,6 +30,9 @@ in settings.
 
 ## Changelog
 
+### [0.4.1] - 2018-05-10
+- Added icon color option and tooltip for hover text.
+
 ### [0.4.0] - 2018-05-09
 - Added icon support. Credit to [ntoff](https://github.com/ntoff/OctoPrint-TabIcons) for the original idea. Uses the [fontawesom 4.7.0](https://fontawesome.com/v4.7.0/icons/) library for class names.
 
@@ -47,6 +50,7 @@ I programmed this plugin for fun and do my best effort to support those that hav
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/jneilliii)
 
+[0.4.1]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.1
 [0.4.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.0
 [0.3.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.3.0
 [0.2.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.2.0

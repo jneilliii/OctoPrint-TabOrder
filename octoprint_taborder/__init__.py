@@ -9,15 +9,15 @@ class taborder(octoprint.plugin.AssetPlugin,
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
-		return dict(js=["js/taborder.js","js/font-awesome.min.css"],
-					css=["css/taborder.css"])
+		return dict(js=["js/taborder.js","js/spectrum.js"],
+					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css"])
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[{'name':'temperature','icon':'fa-thermometer','showtext':True},{'name':'control','icon':'fa-arrows','showtext':True},{'name':'gcodeviewer','icon':'fa-search','showtext':True},{'name':'terminal','icon':'fa-terminal','showtext':True},{'name':'timelapse','icon':'fa-video-camera','showtext':True}])
+		return dict(tabs=[{'name':'temperature','icon':'fa-thermometer','showtext':True,'icon_color':'#000000','icon_tooltip':'Temperature'},{'name':'control','icon':'fa-arrows','showtext':True,'icon_color':'#000000','icon_tooltip':'Control'},{'name':'gcodeviewer','icon':'fa-search','showtext':True,'icon_color':'#000000','icon_tooltip':'GCODE Viewer'},{'name':'terminal','icon':'fa-terminal','showtext':True,'icon_color':'#000000','icon_tooltip':'Terminal'},{'name':'timelapse','icon':'fa-video-camera','showtext':True,'icon_color':'#000000','icon_tooltip':'Timelapse'}])
 		
 	def get_settings_version(self):
-		return 1
+		return 2
 		
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < self.get_settings_version():
