@@ -6,16 +6,29 @@ $(function() {
 		self.tabs = ko.observableArray();
 		self.selectedTab = ko.observable();
 		self.reloadOverlay = undefined;
-		self.globaltabs = ko.computed(function() {
-								var arrOutput = ko.utils.arrayMap(self.tabs(), function(tab) {
-									return tab.name();
+		self.availableTabs = ko.observableArray();
+		self.assignedTabs = ko.computed(function(){
+								var tabs = ko.utils.arrayMap(self.tabs(), function(tab) {
+										return tab.name();
+									});
+								return tabs.sort();
+							});
+		self.unassignedTabs = ko.computed(function() {
+								//find out the categories that are missing from uniqueNames
+								var differences = ko.utils.compareArrays(self.availableTabs().sort(), self.assignedTabs().sort());
+								//return a flat list of differences
+								var results = [];
+								ko.utils.arrayForEach(differences, function(difference) {
+									if (difference.status === "deleted") {
+										results.push(difference.value);
+									}
 								});
-								return arrOutput;
+								return results;
 							});
 							
 		self.onBeforeBinding = function() {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
-        }
+		}
 		
 		self.onEventSettingsUpdated = function (payload) {
             self.tabs(self.settings.settings.plugins.taborder.tabs());
@@ -24,7 +37,13 @@ $(function() {
 		
 		self.onAfterBinding = function(){
 			self.renderTabs();
-		}
+			$('ul#tabs li:not(.dropdown)').each(function(){
+				var tabid = $(this).attr('id');
+				if(tabid.match(/^(tab_)?(.+)_link$/g)){
+					self.availableTabs.push(tabid.replace('temp_link','temperature_link').replace('term_link','terminal_link').replace('gcode_link','gcodeviewer_link').replace(/^(tab_)?(.+)_link$/g,'$2'));
+				}
+			});
+        }
 		
 		self.renderTabs = function(){
 			ko.utils.arrayForEach(self.tabs(), function(tab) {
@@ -84,9 +103,9 @@ $(function() {
 				});
 			};
         };
-
-		self.addTab = function(data) {
-			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable(''),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+		
+		self.addMissingTab = function(data) {
+			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
             self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
 		

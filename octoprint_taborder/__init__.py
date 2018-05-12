@@ -14,10 +14,10 @@ class taborder(octoprint.plugin.AssetPlugin,
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[{'name':'temperature','icon':'fa-thermometer','showtext':True,'icon_color':'#000000','icon_tooltip':'Temperature'},{'name':'control','icon':'fa-arrows','showtext':True,'icon_color':'#000000','icon_tooltip':'Control'},{'name':'gcodeviewer','icon':'fa-search','showtext':True,'icon_color':'#000000','icon_tooltip':'GCODE Viewer'},{'name':'terminal','icon':'fa-terminal','showtext':True,'icon_color':'#000000','icon_tooltip':'Terminal'},{'name':'timelapse','icon':'fa-video-camera','showtext':True,'icon_color':'#000000','icon_tooltip':'Timelapse'}])
+		return dict(tabs=[])
 		
 	def get_settings_version(self):
-		return 2
+		return 3
 		
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < self.get_settings_version():

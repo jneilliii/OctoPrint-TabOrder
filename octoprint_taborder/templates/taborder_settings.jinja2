@@ -1,17 +1,18 @@
 <form id="settings_plugin_taborder_form" class="form-horizontal">
-	<div class="row-fluid" style="text-align: center;"><h4>OctoPrint-TabOrder</h4></div>
+	<div class="row-fluid"><h4>Tab Order Settings</h4></div>
+	<div class="row-fluid"><h5><u>{{ _('Assigned Tabs') }}</u></h5></div>
 	<div class="row-fluid">
 		<div class="row-fluid" style="margin-bottom: 5px;">
 			<div class="span3"><h5>{{ _('Icon') }} <a class="fa fa-info-circle" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" title="Uses fontawesome class names. Click for list of options."></a></h5></div>
 			<div class="span1"><h5>{{ _('Color') }}</h5></div>
 			<div class="span2"><h5>{{ _('Tooltip') }}</h5></div>
-			<div class="span1"><h5>{{ _('Show') }}</h5></div>
+			<div class="span1"><h5>{{ _('Label') }}</h5></div>
 			<div class="span3"><h5>{{ _('Tab Identifier') }}</h5></div>
 			<div class="span1 btn-group" style="text-align: center;">
 				<button class="btn btn-mini icon-arrow-up hidden"></button>
 				<button class="btn btn-mini icon-arrow-down hidden"></button>			
 			</div>
-			<div class="span1 btn-group" style="text-align: center;"><button class="btn btn-mini icon-plus" data-bind="click: addTab"></button></div>
+			<div class="span1 btn-group" style="text-align: center;"><button class="btn btn-mini icon-plus hidden"></button></div>
 		</div>
 	</div>
 	<div class="row-fluid" data-bind="foreach: settings.settings.plugins.taborder.tabs">
@@ -26,6 +27,13 @@
 				<button class="btn btn-mini btn-primary icon-arrow-down" data-bind="click: $parent.moveDown.bind($parent, $index), disable: ($index() === ($parent.tabs().length - 1))"></button>
 			</div>
 			<div class="span1 btn-group" style="text-align: center;"><button class="btn btn-mini btn-danger icon-trash" data-bind="click: $root.removeTab"></button></div>
+		</div>
+	</div>
+	<div class="row-fluid"><h5><u>{{ _('Unassigned Tabs') }}</u></h5></div>
+	<div class="row-fluid" data-bind="foreach: unassignedTabs">
+		<div class="row-fluid">
+			<div class="span1 btn-group"><button class="btn btn-mini btn-primary icon-plus" data-bind="click: $root.addMissingTab"></button></div>
+			<div class="span11" data-bind="text: $data"></div>
 		</div>
 	</div>
 </form>

@@ -30,6 +30,9 @@ in settings.
 
 ## Changelog
 
+### [0.5.0] - 2018-05-12
+- Simplified the process for adding tabs based on existing tabs detected within the interface.
+
 ### [0.4.1] - 2018-05-10
 - Added icon color option and tooltip for hover text.
 
@@ -50,6 +53,7 @@ I programmed this plugin for fun and do my best effort to support those that hav
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/jneilliii)
 
+[0.5.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.0
 [0.4.1]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.1
 [0.4.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.0
 [0.3.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.3.0
