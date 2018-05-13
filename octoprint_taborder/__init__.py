@@ -26,18 +26,18 @@ class taborder(octoprint.plugin.AssetPlugin,
 			self._settings.set(['tabs'], self.get_settings_defaults()["tabs"])
 		
 	def on_settings_save(self, data):
-		old_tabs = self._settings.get(["tabs"])
-
-		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
-
-		new_tabs = self._settings.get(["tabs"])
-		if old_tabs != new_tabs:
-			self._logger.info("tabs changed from {old_tabs} to {new_tabs} reordering tabs.".format(**locals()))
-			flattened_tabs = []
-			for tab in new_tabs:
-				flattened_tabs.append(tab["name"])
-			self._settings.global_set(["appearance","components","order","tab"],flattened_tabs)
+		flattened_old_tabs = self._settings.global_get(["appearance","components","order","tab"])
+		
+		flattened_new_tabs = []
+		for tab in data["tabs"]:
+			flattened_new_tabs.append(tab["name"])
+				
+		if flattened_old_tabs != flattened_new_tabs:
+			self._logger.info("Tab order changed from {flattened_old_tabs} to {flattened_new_tabs} reordering tabs.".format(**locals()))
+			self._settings.global_set(["appearance","components","order","tab"],flattened_new_tabs)
 			self._plugin_manager.send_plugin_message(self._identifier, dict(reload=True))
+			
+		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 	
 	##-- Template mixin
 	def get_template_configs(self):
