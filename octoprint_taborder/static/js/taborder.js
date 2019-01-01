@@ -1,7 +1,7 @@
 $(function() {
-    function taborderViewModel(parameters) {
-        var self = this;
-		
+	function taborderViewModel(parameters) {
+		var self = this;
+
 		self.settings = parameters[0];
 		self.tabs = ko.observableArray();
 		self.selectedTab = ko.observable();
@@ -25,16 +25,16 @@ $(function() {
 								});
 								return results;
 							});
-							
+
 		self.onBeforeBinding = function() {
-            self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
-		
+
 		self.onEventSettingsUpdated = function (payload) {
-            self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			self.renderTabs();
-        }
-		
+		}
+
 		self.onAfterBinding = function(){
 			self.renderTabs();
 			$('ul#tabs li:not(.dropdown)').each(function(){
@@ -43,8 +43,12 @@ $(function() {
 					self.availableTabs.push(tabid.replace('temp_link','temperature_link').replace('term_link','terminal_link').replace('gcode_link','gcodeviewer_link').replace(/^(tab_)?(.+)_link$/g,'$2'));
 				}
 			});
-        }
-		
+		}
+
+		self.onAllBound = function(allViewModels){
+			$(window).resize();
+		}
+
 		self.renderTabs = function(){
 			ko.utils.arrayForEach(self.tabs(), function(tab) {
 				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
@@ -58,16 +62,16 @@ $(function() {
 				}
 			});
 		}
-		
+
 		self.onStartup = function(){
 			self.renderTabs();
 		}
-		
+
 		self.onDataUpdaterPluginMessage = function(plugin, data) {
 			if (plugin != "taborder") {
 				return;
 			}
-			if (data.reload) {				
+			if (data.reload) {
 				new PNotify({
 					title: 'Reload Required',
 					text: 'Tab order has changed and a reload of the web interface is required.\n\n<span class="label label-important">After the save operation is complete<\/span> hold down the <span class="label">CTRL<\/span> key on your keyboard and press the <span class="label">F5<\/span> key.\n\n',
@@ -90,7 +94,7 @@ $(function() {
 											notice.remove();
 										}
 							},
-							
+
 							]
 					},
 					buttons: {
@@ -102,42 +106,42 @@ $(function() {
 					}
 				});
 			};
-        };
-		
+		};
+
 		self.addMissingTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
-            self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
-		
+
 		self.removeTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.remove(data);
-            self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
-		
+
 		self.move = function(amount, $index) {
 			var index = $index();
 			var item = self.tabs.splice(index, 1)[0];
 			var newIndex = Math.max(index + amount, 0);
 			self.settings.settings.plugins.taborder.tabs.splice(newIndex, 0, item);
-            self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		};
-    
+
 		self.moveUp = self.move.bind(self, -1);
 		self.moveDown = self.move.bind(self, 1);
-    }
+	}
 
-    // This is how our plugin registers itself with the application, by adding some configuration
-    // information to the global variable OCTOPRINT_VIEWMODELS
-    ADDITIONAL_VIEWMODELS.push([
-        // This is the constructor to call for instantiating the plugin
-        taborderViewModel,
+	// This is how our plugin registers itself with the application, by adding some configuration
+	// information to the global variable OCTOPRINT_VIEWMODELS
+	ADDITIONAL_VIEWMODELS.push([
+		// This is the constructor to call for instantiating the plugin
+		taborderViewModel,
 
-        // This is a list of dependencies to inject into the plugin, the order which you request
-        // here is the order in which the dependencies will be injected into your view model upon
-        // instantiation via the parameters argument
-        ["settingsViewModel"],
+		// This is a list of dependencies to inject into the plugin, the order which you request
+		// here is the order in which the dependencies will be injected into your view model upon
+		// instantiation via the parameters argument
+		["settingsViewModel"],
 
-        // Finally, this is the list of selectors for all elements we want this view model to be bound to.
-        ["#settings_plugin_taborder_form"]
-    ]);
+		// Finally, this is the list of selectors for all elements we want this view model to be bound to.
+		["#settings_plugin_taborder_form"]
+	]);
 });

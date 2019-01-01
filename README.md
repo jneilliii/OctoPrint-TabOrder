@@ -18,6 +18,9 @@ Install via the Plugin Manager or manually using this URL:
 
 ## Changelog
 
+### [0.5.1] - 2019-01-01
+- Added resize event trigger onAllBound to remove tab stacking when only icons are used.
+
 ### [0.5.0] - 2018-05-12
 - Simplified the process for adding tabs based on existing tabs detected within the interface.
 
@@ -41,6 +44,7 @@ I programmed this plugin for fun and do my best effort to support those that hav
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/jneilliii)
 
+[0.5.1]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.1
 [0.5.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.0
 [0.4.1]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.1
 [0.4.0]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.4.0
