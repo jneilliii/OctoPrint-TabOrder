@@ -17,13 +17,20 @@ class taborder(octoprint.plugin.AssetPlugin,
 		return dict(tabs=[])
 		
 	def get_settings_version(self):
-		return 3
+		return 4
 		
 	def on_settings_migrate(self, target, current=None):
-		if current is None or current < self.get_settings_version():
-			# Reset plug settings to defaults.
+		if current is None or current < 3:
+			# Reset tab settings to defaults.
 			self._logger.debug("Resetting TabOrder Tabs to default.")
 			self._settings.set(['tabs'], self.get_settings_defaults()["tabs"])
+		elif current == 3:
+			updated_tabs = []
+			for tab in self._settings.get(["tabs"]):
+				icon_new = "fas " + tab["icon"]
+				tab["icon"] = icon_new
+				updated_tabs.append(tab)
+			self._settings.set(["tabs"],updated_tabs)
 		
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"])
