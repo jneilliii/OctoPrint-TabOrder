@@ -10,7 +10,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 	##-- AssetPlugin mixin
 	def get_assets(self):
 		return dict(js=["js/taborder.js","js/spectrum.js"],
-					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css"])
+					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css","css/font-awesome-v4-shims.min.css"])
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
