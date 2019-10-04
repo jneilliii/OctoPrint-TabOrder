@@ -72,6 +72,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 		)
 
 __plugin_name__ = "Tab Order"
+__plugin_pythoncompat__ = ">=2.7,<4"
 
 def __plugin_load__():
 	global __plugin_implementation__
