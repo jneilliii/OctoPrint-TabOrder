@@ -35,7 +35,7 @@ $(function() {
 			self.renderTabs();
 		}
 
-		self.onEventSettingsShown = function () {
+		self.onSettingsShown = function () {
 			$('.iconpicker').iconpicker();
 		}
 
