@@ -32,6 +32,7 @@ $(function() {
 
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
+			$('.iconpicker').iconpicker();
 			self.renderTabs();
 		}
 
