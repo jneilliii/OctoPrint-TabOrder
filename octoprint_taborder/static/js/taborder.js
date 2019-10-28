@@ -48,7 +48,7 @@ $(function() {
 
 		self.onAllBound = function(allViewModels){
 			$(window).resize();
-			$('.iconpicker').iconpicker();
+			$('.iconpicker').iconpicker({animation:false});
 		}
 
 		self.renderTabs = function(){
