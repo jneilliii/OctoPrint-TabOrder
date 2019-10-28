@@ -32,8 +32,11 @@ $(function() {
 
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
-			$('.iconpicker').iconpicker();
 			self.renderTabs();
+		}
+
+		self.onEventSettingsShown = function () {
+			$('.iconpicker').iconpicker();
 		}
 
 		self.onAfterBinding = function(){
@@ -48,7 +51,6 @@ $(function() {
 
 		self.onAllBound = function(allViewModels){
 			$(window).resize();
-			$('.iconpicker').iconpicker({animation:false});
 		}
 
 		self.renderTabs = function(){
