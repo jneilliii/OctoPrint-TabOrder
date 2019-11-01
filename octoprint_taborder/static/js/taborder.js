@@ -36,7 +36,7 @@ $(function() {
 		}
 
 		self.onSettingsShown = function () {
-			$('.iconpicker').iconpicker({hideOnSelect: true});
+			$('.iconpicker').iconpicker({hideOnSelect: true,component: '.fa-search'});
 			$('.iconpicker').on('iconpickerSelected', function(event){
 				console.log(event.iconpickerItem);
 				console.log(event.iconpickerValue);
