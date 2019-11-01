@@ -33,7 +33,14 @@ $(function() {
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			self.renderTabs();
+		}
+
+		self.onSettingsShown = function () {
 			$('.iconpicker').iconpicker();
+			$('.iconpicker').on('iconpickerSelected', function(event){
+				console.log(event.iconpickerItem);
+				$(this).val(event.iconpickerValue);
+			});
 		}
 
 		self.onAfterBinding = function(){
@@ -48,7 +55,6 @@ $(function() {
 
 		self.onAllBound = function(allViewModels){
 			$(window).resize();
-			$('.iconpicker').iconpicker();
 		}
 
 		self.renderTabs = function(){
