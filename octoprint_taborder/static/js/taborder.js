@@ -36,10 +36,11 @@ $(function() {
 		}
 
 		self.onSettingsShown = function () {
-			$('.iconpicker').iconpicker();
+			$('.iconpicker').iconpicker({hideOnSelect: true});
 			$('.iconpicker').on('iconpickerSelected', function(event){
 				console.log(event.iconpickerItem);
-				$(this).val(event.iconpickerValue);
+				console.log(event.iconpickerValue);
+				console.log($(this));
 			});
 		}
 
