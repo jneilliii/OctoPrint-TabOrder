@@ -17,7 +17,7 @@
 	</div>
 	<div class="row-fluid" data-bind="foreach: settings.settings.plugins.taborder.tabs">
 		<div class="row-fluid" style="margin-bottom: 5px;">
-			<div class="span3 input-group"><div class="input-prepend"><i data-bind="css: icon"></i></div><input type="text" data-bind="attr: {'data-selected':icon}" class="iconpicker"/><input type="hidden" data-bind="textInput: icon"/></div>
+			<div class="span3 input-prepend"><span class="add-on"><i data-bind="css: icon"></i></span><input type="text" data-bind="attr: {'data-selected':icon}" class="iconpicker"/><input type="hidden" data-bind="textInput: icon"/></div>
 			<div class="span1"><input type="color" class="input-block-level" data-bind="value: icon_color" /></div>
 			<div class="span2"><input type="text" class="input-block-level" data-bind="value: icon_tooltip" /></div>
 			<div class="span1" style="text-align: center;"><input type="checkbox" data-bind="checked: showtext" title="Show default tab label?"/></div>
