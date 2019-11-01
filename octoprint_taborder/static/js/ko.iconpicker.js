@@ -5,9 +5,9 @@ ko.bindingHandlers.iconpicker = {
         $(element).iconpicker(options);
 
         //handle the field changing
-        ko.utils.registerEventHandler(element, "change", function () {
+        ko.utils.registerEventHandler(element, "iconpickerSelected", function (event) {
             var observable = valueAccessor();
-            observable($(element).iconpicker("getDate"));
+            observable(event.iconpickerValue);
         });
 
         //handle disposal (if KO removes by the template binding)
@@ -19,6 +19,6 @@ ko.bindingHandlers.iconpicker = {
     //update the control when the view model changes
     update: function(element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
-        $(element).iconpicker("setDate", value);
+        $(element).attr("data-selected", value);
     }
 };

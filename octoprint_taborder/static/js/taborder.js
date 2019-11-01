@@ -36,13 +36,13 @@ $(function() {
 		}
 
 		self.onSettingsShown = function () {
-			$('.iconpicker').iconpicker({hideOnSelect: true});
+/* 			$('.iconpicker').iconpicker({hideOnSelect: true});
 			$('.iconpicker').on('iconpickerSelected', function(event){
 				console.log(event.iconpickerItem);
 				console.log(event.iconpickerValue);
 				console.log($(this));
-				$(this).parent().parent().children('input[type="hidden"]').val(event.iconpickerValue);
-			});
+				//$(this).parent().parent().children('input[type="hidden"]').val(event.iconpickerValue);
+			}); */
 		}
 
 		self.onAfterBinding = function(){
