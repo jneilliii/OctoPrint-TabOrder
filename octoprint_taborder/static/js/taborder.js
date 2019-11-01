@@ -41,6 +41,7 @@ $(function() {
 				console.log(event.iconpickerItem);
 				console.log(event.iconpickerValue);
 				console.log($(this));
+				$(this).parent().parent().children('input[type="hidden"]').val(event.iconpickerValue);
 			});
 		}
 
