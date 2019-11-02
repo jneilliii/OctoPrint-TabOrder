@@ -18,6 +18,12 @@ Install via the Plugin Manager or manually using this URL:
 
 ## Changelog
 
+### [0.5.5] - 2019-11-1
+- Added fontawesome icon picker to make the class naming easier on the end user.
+
+### [0.5.4] - 2019-10-21
+- Added Python 3 compatibility.
+
 ### [0.5.3] - 2019-01-03
 - Added fontawesom version 4 shim to resolve issues with other icons missing in OctoPrint after installing.
 
@@ -50,6 +56,8 @@ I programmed this plugin for fun and do my best effort to support those that hav
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/jneilliii)
 
+[0.5.5]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.5
+[0.5.4]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.4
 [0.5.3]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.3
 [0.5.2]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.2
 [0.5.1]: https://github.com/jneilliii/OctoPrint-TabOrder/tree/0.5.1
