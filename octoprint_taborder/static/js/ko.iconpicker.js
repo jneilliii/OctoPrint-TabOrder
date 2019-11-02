@@ -20,6 +20,6 @@ ko.bindingHandlers.iconpicker = {
     update: function(element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
         $(element).attr("data-selected", value);
-		$(element).val(value);
+		//$(element).val(value);
     }
 };
