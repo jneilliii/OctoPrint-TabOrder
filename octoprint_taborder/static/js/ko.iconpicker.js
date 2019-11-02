@@ -2,6 +2,9 @@ ko.bindingHandlers.iconpicker = {
     init: function(element, valueAccessor, allBindingsAccessor) {
         //initialize iconpicker with some optional options
         var options = allBindingsAccessor().iconpickerOptions || {};
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).attr("data-selected", value);
+		$(element).val(value);
         $(element).iconpicker(options);
 
         //handle the field changing
