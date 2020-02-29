@@ -4,6 +4,7 @@ $(function() {
 
 		self.settings = parameters[0];
 		self.tabs = ko.observableArray();
+		self.hidden_tabs = ko.observableArray();
 		self.selectedTab = ko.observable();
 		self.reloadOverlay = undefined;
 		self.availableTabs = ko.observableArray();
@@ -13,9 +14,26 @@ $(function() {
 									});
 								return tabs.sort();
 							});
+		self.hiddenTabs = ko.computed(function(){
+								var tabs = ko.utils.arrayMap(self.hidden_tabs(), function(tab) {
+										return tab.name();
+									});
+								return tabs.sort();
+							});
+		self.hiddenTabsByID = ko.computed(function(){
+								var tabs = ko.utils.arrayMap(self.hidden_tabs(), function(tab) {
+										if(tab.name().indexOf('plugin_') > -1){
+											return 'tab_' + tab.name() + '_link';
+										} else {
+											return tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode') + '_link';
+										}
+									});
+								return tabs;
+							});
 		self.unassignedTabs = ko.computed(function() {
 								//find out the categories that are missing from uniqueNames
-								var differences = ko.utils.compareArrays(self.availableTabs().sort(), self.assignedTabs().sort());
+								var combined_tabs = self.assignedTabs().concat(self.hiddenTabs())
+								var differences = ko.utils.compareArrays(self.availableTabs().sort(), combined_tabs.sort());
 								//return a flat list of differences
 								var results = [];
 								ko.utils.arrayForEach(differences, function(difference) {
@@ -28,15 +46,17 @@ $(function() {
 
 		self.onBeforeBinding = function() {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 		}
 
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
+			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 			self.renderTabs();
 		}
 
 		self.onAfterBinding = function(){
-			self.renderTabs();
+			//self.renderTabs();
 			$('ul#tabs li:not(.dropdown)').each(function(){
 				var tabid = $(this).attr('id');
 				if(tabid.match(/^(tab_)?(.+)_link$/g)){
@@ -46,7 +66,7 @@ $(function() {
 		}
 
 		self.onAllBound = function(allViewModels){
-			$(window).resize();
+			self.renderTabs();
 		}
 
 		self.renderTabs = function(){
@@ -61,10 +81,24 @@ $(function() {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).prepend('<i class="'+tab.icon()+' fa-lg" style="color:'+tab.icon_color()+'"></i> ');
 				}
 			});
+			ko.utils.arrayForEach(self.hidden_tabs(), function(tab) {
+				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
+				if (!tab.showtext()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
+				}
+				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon() + ' fa-lg').css({'color':tab.icon_color()});
+				} else {
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).prepend('<i class="'+tab.icon()+' fa-lg" style="color:'+tab.icon_color()+'"></i> ');
+				}
+			});
 		}
 
-		self.onStartup = function(){
-			self.renderTabs();
+		self.onStartupComplete = function(){
+			if($('#tabs').data('tabdrop') == undefined){
+				$('#tabs').tabdrop({hidden: self.hiddenTabsByID()});
+			}
+			setTimeout(function(){$(window).resize();},200);
 		}
 
 		self.onDataUpdaterPluginMessage = function(plugin, data) {
@@ -113,21 +147,20 @@ $(function() {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
 
+		self.addHiddenMissingTab = function(data) {
+			self.settings.settings.plugins.taborder.hidden_tabs.push({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
+		}
+
 		self.removeTab = function(data) {
 			self.settings.settings.plugins.taborder.tabs.remove(data);
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 		}
 
-		self.move = function(amount, $index) {
-			var index = $index();
-			var item = self.tabs.splice(index, 1)[0];
-			var newIndex = Math.max(index + amount, 0);
-			self.settings.settings.plugins.taborder.tabs.splice(newIndex, 0, item);
-			self.tabs(self.settings.settings.plugins.taborder.tabs());
-		};
-
-		self.moveUp = self.move.bind(self, -1);
-		self.moveDown = self.move.bind(self, 1);
+		self.removeHiddenTab = function(data) {
+			self.settings.settings.plugins.taborder.hidden_tabs.remove(data);
+			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
+		}
 	}
 
 	// This is how our plugin registers itself with the application, by adding some configuration
