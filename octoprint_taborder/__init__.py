@@ -9,12 +9,12 @@ class taborder(octoprint.plugin.AssetPlugin,
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
-		return dict(js=["js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
+		return dict(js=["js/bootstrap-tabdrop.js","js/jquery-ui.min.js","js/knockout-sortable.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
 					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css"])
 		
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[])
+		return dict(tabs=[],hidden_tabs=[])
 		
 	def get_settings_version(self):
 		return 4
@@ -33,11 +33,11 @@ class taborder(octoprint.plugin.AssetPlugin,
 			self._settings.set(["tabs"],updated_tabs)
 		
 	def on_settings_save(self, data):
-		old_tabs = self._settings.get(["tabs"])
+		old_tabs = self._settings.get(["tabs"]) + self._settings.get(["hidden_tabs"])
 
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
-		new_tabs = self._settings.get(["tabs"])
+		new_tabs = self._settings.get(["tabs"]) + self._settings.get(["hidden_tabs"])
 		if old_tabs != new_tabs:
 			self._logger.info("tabs changed from {old_tabs} to {new_tabs} reordering tabs.".format(**locals()))
 			flattened_tabs = []
