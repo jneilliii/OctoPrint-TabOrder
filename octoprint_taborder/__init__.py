@@ -9,7 +9,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 	
 	##-- AssetPlugin mixin
 	def get_assets(self):
-		return dict(js=["js/bootstrap-tabdrop.js","js/jquery-ui.min.js","js/knockout-sortable.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
+		return dict(js=["js/jquery-ui.min.js","js/knockout-sortable.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
 					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css"])
 		
 	##-- Settings mixin
