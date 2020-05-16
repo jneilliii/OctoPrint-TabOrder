@@ -11,7 +11,7 @@
 			<div class="span4"><h5>{{ _('Tab Identifier') }}</h5></div>
 		</div>
 	</div>
-	<div class="row-fluid" data-bind="sortable: { data: settings.settings.plugins.taborder.tabs, options: { cancel: '.unsortable', handle: '.move_tab', axis:'y'} }">
+	<div class="row-fluid" style="min-height: 50px;" data-bind="sortable: { data: settings.settings.plugins.taborder.tabs, options: { cancel: '.unsortable', handle: '.move_tab', axis:'y'} }">
 		<div class="row-fluid" style="margin-bottom: 5px;">
 			<div class="span1 btn-group" style="text-align: center;padding-top:3px;"><button class="btn btn-mini icon-move move_tab"></button></div>
 			<div class="span3"><div class="input-prepend input-block-level"><span class="add-on" style="width: 25px;"><i class="" data-bind="css: icon, style: { color: icon_color() ? icon_color() : 'black' }"></i></span><input type="text" data-bind="iconpicker: icon,iconpickerOptions: {hideOnSelect: true, collision: true}" class="iconpicker input-block-level"/></div></div>
@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<div class="row-fluid"><h5><u>{{ _('Hidden Tabs') }}</u></h5></div>
-	<div class="row-fluid" data-bind="sortable: { data: settings.settings.plugins.taborder.hidden_tabs, options: { cancel: '.unsortable', handle: '.move_tab', axis:'y'} }">
+	<div class="row-fluid" style="min-height: 50px;" data-bind="sortable: { data: settings.settings.plugins.taborder.hidden_tabs, options: { cancel: '.unsortable', handle: '.move_tab', axis:'y'} }">
 		<div class="row-fluid" style="margin-bottom: 5px;">
 			<div class="span1 btn-group" style="text-align: center;padding-top:3px;"><button class="btn btn-mini icon-move move_tab"></button></div>
 			<div class="span3"><div class="input-prepend input-block-level"><span class="add-on" style="width: 25px;"><i class="" data-bind="css: icon, style: { color: icon_color() ? icon_color() : 'black' }"></i></span><input type="text" data-bind="iconpicker: icon,iconpickerOptions: {hideOnSelect: true, collision: true}" class="iconpicker input-block-level"/></div></div>
