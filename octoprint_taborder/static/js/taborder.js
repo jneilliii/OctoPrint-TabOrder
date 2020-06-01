@@ -143,13 +143,23 @@ $(function() {
 		};
 
 		self.addMissingTab = function(data) {
-			self.settings.settings.plugins.taborder.tabs.push({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.settings.settings.plugins.taborder.tabs.push(self.selectedTab());
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
+			$('#TabOrderEditor').modal('show');
 		}
 
 		self.addHiddenMissingTab = function(data) {
-			self.settings.settings.plugins.taborder.hidden_tabs.push({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.settings.settings.plugins.taborder.hidden_tabs.push(self.selectedTab());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
+			$('#TabOrderEditor').modal('show');
+		}
+
+		self.editTab = function(data) {
+			console.log(data);
+			self.selectedTab(data);
+			$('#TabOrderEditor').modal('show');
 		}
 
 		self.removeTab = function(data) {
@@ -163,18 +173,9 @@ $(function() {
 		}
 	}
 
-	// This is how our plugin registers itself with the application, by adding some configuration
-	// information to the global variable OCTOPRINT_VIEWMODELS
 	ADDITIONAL_VIEWMODELS.push([
-		// This is the constructor to call for instantiating the plugin
 		taborderViewModel,
-
-		// This is a list of dependencies to inject into the plugin, the order which you request
-		// here is the order in which the dependencies will be injected into your view model upon
-		// instantiation via the parameters argument
 		["settingsViewModel"],
-
-		// Finally, this is the list of selectors for all elements we want this view model to be bound to.
-		["#settings_plugin_taborder_form"]
+		["#settings_plugin_taborder"]
 	]);
 });

@@ -27,3 +27,7 @@
 	font-size: 40px;
 	color: #FFF;
 }
+
+#TabOrderEditor div.modal-body {
+	overflow: visible !important;
+}
