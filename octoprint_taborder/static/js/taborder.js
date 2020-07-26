@@ -86,6 +86,9 @@ $(function() {
 				if (!tab.showtext()){
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
 				}
+				if (!tab.usetitle()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.title());
+				}
 				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon()).css({'color':tab.icon_color()});
 				} else {
@@ -143,14 +146,14 @@ $(function() {
 		};
 
 		self.addMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.tabs.push(self.selectedTab());
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			$('#TabOrderEditor').modal('show');
 		}
 
 		self.addHiddenMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.hidden_tabs.push(self.selectedTab());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 			$('#TabOrderEditor').modal('show');
