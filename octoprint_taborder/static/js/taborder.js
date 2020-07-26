@@ -112,39 +112,8 @@ $(function() {
 				return;
 			}
 			if (data.reload) {
-				new PNotify({
-					title: 'Reload Required',
-					text: 'Tab order has changed and a reload of the web interface is required.\n\n<span class="label label-important">After the save operation is complete<\/span> hold down the <span class="label">CTRL<\/span> key on your keyboard and press the <span class="label">F5<\/span> key.\n\n',
-					hide: false,
-					icon: 'icon icon-refresh',
-					addclass: 'taborder-reloadneeded',
-					confirm: {
-						confirm: true,
-						buttons: [{
-								text: 'Ok',
-								addClass: 'btn',
-								click: function(notice) {
-											notice.remove();
-										}
-							},
-							{
-								text: 'Cancel',
-								addClass: 'hidden',
-								click: function(notice) {
-											notice.remove();
-										}
-							},
-
-							]
-					},
-					buttons: {
-						closer: false,
-						sticker: false
-					},
-					history: {
-						history: false
-					}
-				});
+				$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must reload now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing.');
+				$('#reloadui_overlay').modal();
 			};
 		};
 
