@@ -116,14 +116,14 @@ $(function() {
 		};
 
 		self.addMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.tabs.push(self.selectedTab());
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			$('#TabOrderEditor').modal('show');
 		}
 
 		self.addHiddenMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.hidden_tabs.push(self.selectedTab());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 			$('#TabOrderEditor').modal('show');
