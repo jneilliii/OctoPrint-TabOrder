@@ -86,8 +86,8 @@ $(function() {
 				if (!tab.showtext()){
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
 				}
-				if (!tab.usetitle()){
-					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.title());
+				if (tab.usetitle()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.icon_tooltip());
 				}
 				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon()).css({'color':tab.icon_color()});
