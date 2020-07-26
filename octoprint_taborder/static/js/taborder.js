@@ -52,11 +52,14 @@ $(function() {
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
-			self.renderTabs();
+			if (self.active_settings_tabs !== ko.toJSON(self.settings.settings.plugins.taborder.tabs) || self.active_settings_hidden_tabs !== ko.toJSON(self.settings.settings.plugins.taborder.hidden_tabs)){
+				self.showReloadDialog();
+			}
 		}
 
 		self.onAfterBinding = function(){
-			//self.renderTabs();
+			self.active_settings_tabs = ko.toJSON(self.settings.settings.plugins.taborder.tabs);
+			self.active_settings_hidden_tabs = ko.toJSON(self.settings.settings.plugins.taborder.hidden_tabs);
 			$('ul#tabs li:not(.dropdown)').each(function(){
 				var tabid = $(this).attr('id');
 				if(tabid.match(/^(tab_)?(.+)_link$/g)){
@@ -107,14 +110,9 @@ $(function() {
 			setTimeout(function(){$(window).resize();},200);
 		}
 
-		self.onDataUpdaterPluginMessage = function(plugin, data) {
-			if (plugin != "taborder") {
-				return;
-			}
-			if (data.reload) {
-				$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must reload now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing.');
-				$('#reloadui_overlay').modal();
-			};
+		self.showReloadDialog = function(){
+			$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must reload now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing.');
+			$('#reloadui_overlay').modal();
 		};
 
 		self.addMissingTab = function(data) {

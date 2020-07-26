@@ -51,7 +51,6 @@ class taborder(octoprint.plugin.AssetPlugin,
 			for tab in new_tabs:
 				flattened_tabs.append(tab["name"])
 			self._settings.global_set(["appearance","components","order","tab"],flattened_tabs)
-			self._plugin_manager.send_plugin_message(self._identifier, dict(reload=True))
 
 	##-- Template mixin
 	def get_template_configs(self):
