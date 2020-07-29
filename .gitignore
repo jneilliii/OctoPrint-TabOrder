@@ -1,8 +1,10 @@
-*.iml
-*.xml
-*.txt
 *.pyc
-*.bak
-/OctoPrint_TabOrder.egg-info/PKG-INFO
-/OctoPrint_TabOrder.egg-info/not-zip-safe
+*.swp
 .idea
+*.iml
+build
+dist
+*.egg*
+.DS_Store
+*.zip
+*.bak
