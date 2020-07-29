@@ -111,7 +111,8 @@ $(function() {
 		}
 
 		self.showReloadDialog = function(){
-			$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must reload now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing.');
+			$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must force a browser refresh now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing. Please hold down the <code>shift</code> or <code>ctrl</code> key (based on your browser) and press F5.');
+			$('#reloadui_overlay_wrapper button').remove();
 			$('#reloadui_overlay').modal();
 		};
 

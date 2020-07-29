@@ -31,13 +31,13 @@ class taborder(octoprint.plugin.AssetPlugin,
 				tab["icon"] = icon_new
 				tab["usetitle"] = False
 				updated_tabs.append(tab)
-			self._settings.set(["tabs"],updated_tabs)
+			self._settings.set(["tabs"], updated_tabs)
 		elif current == 4:
 			updated_tabs = []
 			for tab in self._settings.get(["tabs"]):
 				tab["usetitle"] = False
 				updated_tabs.append(tab)
-			self._settings.set(["tabs"],updated_tabs)
+			self._settings.set(["tabs"], updated_tabs)
 
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"]) + self._settings.get(["hidden_tabs"])
