@@ -31,12 +31,13 @@
 		<h3>Tab Editor: <span data-bind="text: name"/></h3>
 	</div>
 	<div class="modal-body">
-			<div class="controls"><label class="control-label">{{ _('Icon') }}</label><div class="input-prepend input-block-level"><span class="add-on" style="width: 25px;"><i class="" data-bind="css: icon, style: { color: icon_color() ? icon_color() : 'black' }"></i></span><input type="text" data-bind="iconpicker: icon,iconpickerOptions: {hideOnSelect: true, collision: true}" class="iconpicker input-block-level"/></div></div>
-			<div class="controls"><label class="control-label">{{ _('Color') }}</label><input type="color" class="input-block-level" data-bind="value: icon_color" /></div>
+			<div class="controls"><label class="control-label">{{ _('Icon') }}</label><div class="input-prepend"><span class="add-on" style="width: 25px;"><i class="" data-bind="css: icon, style: { color: icon_color() ? icon_color() : 'black' }"></i></span><input type="text" data-bind="iconpicker: icon,iconpickerOptions: {hideOnSelect: true, collision: true}" class="iconpicker input"/></div></div>
+			<div class="controls"><label class="control-label">{{ _('Color') }}</label><div class="input-prepend"><input type="color" class="add-on" style="width: 25px;" data-bind="value: icon_color" /><input type="text" class="input" data-bind="value: icon_color" title="Leave blank to inherit color setting" placeholder="Leave blank to inherit color" /></div></div>
 			<div class="controls"><label class="control-label">{{ _('Tooltip') }}</label><input type="text" class="input-block-level" data-bind="value: icon_tooltip" /></div>
-			<div class="controls"><label class="control-label"><input type="checkbox" data-bind="checked: showtext" title="Show default tab label?"/> {{ _('Show Tab Name') }}</label></div>
+			<div class="controls"><label class="control-label"><input type="checkbox" style="margin-top: -1px;" data-bind="checked: showtext" title="Show default tab label?"/> {{ _('Show Tab Name') }}</label></div>
+			<div class="controls"><label class="control-label"><input type="checkbox" style="margin-top: -1px;" data-bind="checked: usetitle" title="Use title as tab label?"/> {{ _('Use Tooltip as Tab Name') }}</label></div>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn" data-dismiss="modal">Close</button>
+		<small>Make sure to click save in the main settings after making changes here.</small> <button type="button" class="btn" data-dismiss="modal">Close</button>
 	</div>
 </div>

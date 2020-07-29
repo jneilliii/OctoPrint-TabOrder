@@ -6,19 +6,19 @@ import os
 class taborder(octoprint.plugin.AssetPlugin,
 				octoprint.plugin.TemplatePlugin,
                 octoprint.plugin.SettingsPlugin):
-	
+
 	##-- AssetPlugin mixin
 	def get_assets(self):
 		return dict(js=["js/bootstrap-tabdrop.js","js/jquery-ui.min.js","js/knockout-sortable.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
 					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css"])
-		
+
 	##-- Settings mixin
 	def get_settings_defaults(self):
 		return dict(tabs=[],hidden_tabs=[])
-		
+
 	def get_settings_version(self):
-		return 4
-		
+		return 5
+
 	def on_settings_migrate(self, target, current=None):
 		if current is None or current < 3:
 			# Reset tab settings to defaults.
@@ -29,9 +29,16 @@ class taborder(octoprint.plugin.AssetPlugin,
 			for tab in self._settings.get(["tabs"]):
 				icon_new = "fas " + tab["icon"]
 				tab["icon"] = icon_new
+				tab["usetitle"] = False
 				updated_tabs.append(tab)
 			self._settings.set(["tabs"],updated_tabs)
-		
+		elif current == 4:
+			updated_tabs = []
+			for tab in self._settings.get(["tabs"]):
+				tab["usetitle"] = False
+				updated_tabs.append(tab)
+			self._settings.set(["tabs"],updated_tabs)
+
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"]) + self._settings.get(["hidden_tabs"])
 
@@ -44,8 +51,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 			for tab in new_tabs:
 				flattened_tabs.append(tab["name"])
 			self._settings.global_set(["appearance","components","order","tab"],flattened_tabs)
-			self._plugin_manager.send_plugin_message(self._identifier, dict(reload=True))
-	
+
 	##-- Template mixin
 	def get_template_configs(self):
 		return [dict(type="settings",custom_bindings=True)]
@@ -53,7 +59,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 	##~~ Softwareupdate hook
 	def get_version(self):
 		return self._plugin_version
-		
+
 	def get_update_information(self):
 		return dict(
 			taborder=dict(

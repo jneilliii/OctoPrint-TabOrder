@@ -52,11 +52,14 @@ $(function() {
 		self.onEventSettingsUpdated = function (payload) {
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
-			self.renderTabs();
+			if (self.active_settings_tabs !== ko.toJSON(self.settings.settings.plugins.taborder.tabs) || self.active_settings_hidden_tabs !== ko.toJSON(self.settings.settings.plugins.taborder.hidden_tabs)){
+				self.showReloadDialog();
+			}
 		}
 
 		self.onAfterBinding = function(){
-			//self.renderTabs();
+			self.active_settings_tabs = ko.toJSON(self.settings.settings.plugins.taborder.tabs);
+			self.active_settings_hidden_tabs = ko.toJSON(self.settings.settings.plugins.taborder.hidden_tabs);
 			$('ul#tabs li:not(.dropdown)').each(function(){
 				var tabid = $(this).attr('id');
 				if(tabid.match(/^(tab_)?(.+)_link$/g)){
@@ -75,6 +78,9 @@ $(function() {
 				if (!tab.showtext()){
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
 				}
+				if (tab.usetitle()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.icon_tooltip());
+				}
 				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon()).css({'color':tab.icon_color()});
 				} else {
@@ -85,6 +91,9 @@ $(function() {
 				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
 				if (!tab.showtext()){
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
+				}
+				if (tab.usetitle()){
+					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.icon_tooltip());
 				}
 				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon()).css({'color':tab.icon_color()});
@@ -101,56 +110,20 @@ $(function() {
 			setTimeout(function(){$(window).resize();},200);
 		}
 
-		self.onDataUpdaterPluginMessage = function(plugin, data) {
-			if (plugin != "taborder") {
-				return;
-			}
-			if (data.reload) {
-				new PNotify({
-					title: 'Reload Required',
-					text: 'Tab order has changed and a reload of the web interface is required.\n\n<span class="label label-important">After the save operation is complete<\/span> hold down the <span class="label">CTRL<\/span> key on your keyboard and press the <span class="label">F5<\/span> key.\n\n',
-					hide: false,
-					icon: 'icon icon-refresh',
-					addclass: 'taborder-reloadneeded',
-					confirm: {
-						confirm: true,
-						buttons: [{
-								text: 'Ok',
-								addClass: 'btn',
-								click: function(notice) {
-											notice.remove();
-										}
-							},
-							{
-								text: 'Cancel',
-								addClass: 'hidden',
-								click: function(notice) {
-											notice.remove();
-										}
-							},
-
-							]
-					},
-					buttons: {
-						closer: false,
-						sticker: false
-					},
-					history: {
-						history: false
-					}
-				});
-			};
+		self.showReloadDialog = function(){
+			$('#reloadui_overlay_wrapper > div > div > p:nth-child(2)').html('Tab Order changes detected, you must reload now for these new changes to take effect. This will not interrupt any print jobs you might have ongoing.');
+			$('#reloadui_overlay').modal();
 		};
 
 		self.addMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.tabs.push(self.selectedTab());
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			$('#TabOrderEditor').modal('show');
 		}
 
 		self.addHiddenMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'icon_color':ko.observable('#000000'),'icon_tooltip':ko.observable('')});
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
 			self.settings.settings.plugins.taborder.hidden_tabs.push(self.selectedTab());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 			$('#TabOrderEditor').modal('show');
