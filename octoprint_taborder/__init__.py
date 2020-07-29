@@ -14,7 +14,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 
 	##-- Settings mixin
 	def get_settings_defaults(self):
-		return dict(tabs=[],hidden_tabs=[])
+		return dict(tabs=[], hidden_tabs=[])
 
 	def get_settings_version(self):
 		return 5
@@ -34,10 +34,15 @@ class taborder(octoprint.plugin.AssetPlugin,
 			self._settings.set(["tabs"], updated_tabs)
 		elif current == 4:
 			updated_tabs = []
+			updated_hidden_tabs = []
 			for tab in self._settings.get(["tabs"]):
 				tab["usetitle"] = False
 				updated_tabs.append(tab)
+			for tab in self._settings.get(["hidden_tabs"]):
+				tab["usetitle"] = False
+				updated_hidden_tabs.append(tab)
 			self._settings.set(["tabs"], updated_tabs)
+			self._settings.set(["hidden_tabs"], updated_hidden_tabs)
 
 	def on_settings_save(self, data):
 		old_tabs = self._settings.get(["tabs"]) + self._settings.get(["hidden_tabs"])
