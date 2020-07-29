@@ -5,3 +5,4 @@
 *.bak
 /OctoPrint_TabOrder.egg-info/PKG-INFO
 /OctoPrint_TabOrder.egg-info/not-zip-safe
+.idea
