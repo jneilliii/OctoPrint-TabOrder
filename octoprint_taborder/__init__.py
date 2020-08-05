@@ -2,6 +2,7 @@
 
 import octoprint.plugin
 import os
+from octoprint.util import version
 
 class taborder(octoprint.plugin.AssetPlugin,
 				octoprint.plugin.TemplatePlugin,
@@ -54,7 +55,10 @@ class taborder(octoprint.plugin.AssetPlugin,
 			self._logger.info("tabs changed from {old_tabs} to {new_tabs} reordering tabs.".format(**locals()))
 			flattened_tabs = []
 			for tab in new_tabs:
-				flattened_tabs.append(tab["name"])
+				if version.get_octoprint_version() > version.get_comparable_version("1.4.0") and tab["name"] == "gcodeviewer":
+					flattened_tabs.append("plugin_{}".format(tab["name"]))
+				else:
+					flattened_tabs.append(tab["name"])
 			self._settings.global_set(["appearance","components","order","tab"],flattened_tabs)
 
 	##-- Template mixin
