@@ -63,7 +63,7 @@ $(function() {
 			$('ul#tabs li:not(.dropdown)').each(function(){
 				var tabid = $(this).attr('id');
 				if(tabid.match(/^(tab_)?(.+)_link$/g)){
-					self.availableTabs.push(tabid.replace('temp_link','temperature_link').replace('term_link','terminal_link').replace('gcode_link','gcodeviewer_link').replace(/^(tab_)?(.+)_link$/g,'$2'));
+					self.availableTabs.push(tabid.replace('temp_link','temperature_link').replace('term_link','terminal_link').replace(/^gcode_link$/,'gcodeviewer_link').replace(/^(tab_)?(.+)_link$/g,'$2'));
 				}
 			});
 		}
