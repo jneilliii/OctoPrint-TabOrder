@@ -10,7 +10,7 @@ class taborder(octoprint.plugin.AssetPlugin,
 
 	##-- AssetPlugin mixin
 	def get_assets(self):
-		return dict(js=["js/bootstrap-tabdrop.js","js/jquery-ui.min.js","js/knockout-sortable.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
+		return dict(js=["js/bootstrap-tabdrop.js","js/jquery-ui.min.js","js/knockout-sortable.1.2.0.js","js/taborder.js","js/spectrum.js","js/fontawesome-iconpicker.js","js/ko.iconpicker.js"],
 					css=["css/taborder.css","css/font-awesome.min.css","css/spectrum.css","css/font-awesome-v4-shims.min.css","css/fontawesome-iconpicker.css"])
 
 	##-- Settings mixin
@@ -80,6 +80,16 @@ class taborder(octoprint.plugin.AssetPlugin,
 				user="jneilliii",
 				repo="OctoPrint-TabOrder",
 				current=self._plugin_version,
+                stable_branch=dict(
+                    name="Stable", branch="master", comittish=["master"]
+                ),
+                prerelease_branches=[
+                    dict(
+                        name="Release Candidate",
+                        branch="rc",
+                        comittish=["rc", "master"],
+                    )
+                ],
 
 				# update method: pip
 				pip="https://github.com/jneilliii/OctoPrint-TabOrder/archive/{target_version}.zip"
