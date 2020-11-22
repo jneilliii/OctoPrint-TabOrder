@@ -18,7 +18,7 @@ Install via the Plugin Manager or manually using this URL:
 
 ## Most recent changelog
 
-**[0.9.26](https://github.com/jneilliii/OctoPrint-TabOrder/releases/tag/0.5.12)** (11/20/2020)
+**[0.9.26](https://github.com/jneilliii/OctoPrint-TabOrder/releases/tag/0.9.26)** (11/22/2020)
 
 * update knockout sortable for OctoPrint 1.5.0 compatibility
 * add release channels available in OctoPrint 1.5.0
