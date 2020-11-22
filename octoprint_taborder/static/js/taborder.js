@@ -3,6 +3,7 @@ $(function() {
 		var self = this;
 
 		self.settings = parameters[0];
+		self.touchui = parameters[1];
 		self.tabs = ko.observableArray();
 		self.hidden_tabs = ko.observableArray();
 		self.selectedTab = ko.observable();
@@ -73,6 +74,10 @@ $(function() {
 		}
 
 		self.renderTabs = function(){
+			if (self.touchui && self.touchui.isActive()) {
+				return
+			}
+
 			ko.utils.arrayForEach(self.tabs(), function(tab) {
 				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
 				if (!tab.showtext()){
@@ -104,6 +109,10 @@ $(function() {
 		}
 
 		self.onStartupComplete = function(){
+			if (self.touchui && self.touchui.isActive()) {
+				return
+			}
+
 			if($('#tabs').data('tabdrop') == undefined){
 				$('#tabs').tabdrop({hidden: self.hiddenTabsByID()});
 			}
@@ -147,9 +156,10 @@ $(function() {
 		}
 	}
 
-	ADDITIONAL_VIEWMODELS.push([
-		taborderViewModel,
-		["settingsViewModel"],
-		["#settings_plugin_taborder"]
-	]);
+	OCTOPRINT_VIEWMODELS.push({
+		construct: taborderViewModel,
+		dependencies: ["settingsViewModel", "touchUIViewModel"],
+		optional: ["touchUIViewModel"],
+		elements: ["#settings_plugin_taborder"]
+	});
 });
