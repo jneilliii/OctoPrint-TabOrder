@@ -63,6 +63,7 @@ $(function() {
 			self.active_settings_hidden_tabs = ko.toJSON(self.settings.settings.plugins.taborder.hidden_tabs);
 			$('ul#tabs li:not(.dropdown)').each(function(){
 				var tabid = $(this).attr('id');
+				var tabname = $(this).text();
 				if(tabid.match(/^(tab_)?(.+)_link$/g)){
 					self.availableTabs.push(tabid.replace('temp_link','temperature_link').replace('term_link','terminal_link').replace(/^gcode_link$/,'gcodeviewer_link').replace(/^(tab_)?(.+)_link$/g,'$2'));
 				}
@@ -126,14 +127,26 @@ $(function() {
 		};
 
 		self.addMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
+			var tabid = data.replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode');
+			if($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').length) {
+				var tabname = $('li#' + tabid + '_link a,li#tab_' + tabid + '_link a').text().trim();
+			} else {
+				var tabname = '';
+			}
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable(tabname)});
 			self.settings.settings.plugins.taborder.tabs.push(self.selectedTab());
 			self.tabs(self.settings.settings.plugins.taborder.tabs());
 			$('#TabOrderEditor').modal('show');
 		}
 
 		self.addHiddenMissingTab = function(data) {
-			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable('')});
+			var tabid = data.replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode');
+			if($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').length) {
+				var tabname = $('li#' + tabid + '_link a,li#tab_' + tabid + '_link a').text().trim();
+			} else {
+				var tabname = '';
+			}
+			self.selectedTab({'name':ko.observable(data),'icon':ko.observable(''),'showtext':ko.observable(true),'usetitle':ko.observable(false),'icon_color':ko.observable(''),'icon_tooltip':ko.observable(tabname)});
 			self.settings.settings.plugins.taborder.hidden_tabs.push(self.selectedTab());
 			self.hidden_tabs(self.settings.settings.plugins.taborder.hidden_tabs());
 			$('#TabOrderEditor').modal('show');
