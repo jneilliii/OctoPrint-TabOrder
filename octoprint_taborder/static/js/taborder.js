@@ -83,10 +83,9 @@ $(function() {
 				var tabid = tab.name().replace('temperature','temp').replace('terminal','term').replace('gcodeviewer','gcode'); // fix for default tab ids not matching links.
 				if (!tab.showtext()){
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text('');
-				}
-				if (tab.usetitle()){
-					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.icon_tooltip());
-				}
+				} else if (tab.usetitle()){
+                    $('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').text(tab.icon_tooltip());
+                }
 				if ($('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').children('i').length > 0) {
 					$('li#'+tabid+'_link a,li#tab_'+tabid+'_link a').attr('title',tab.icon_tooltip()).children('i').addClass(tab.icon()).css({'color':tab.icon_color()});
 				} else {
